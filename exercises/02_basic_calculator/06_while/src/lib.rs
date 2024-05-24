@@ -5,13 +5,15 @@ pub fn factorial(n: u32) -> u32 {
     // suppressing type errors.
     // It panics at runtime.
     // todo!();
-    let mut fact: u32 = 0;
+    // let mut fact: u32 = 0;
+
+    let mut fact: u32 = 1;
     let mut i: u32 = n;
 
     if n == 1 || n == 0 {
         return 1;
     }
-
+    
     while i > 1 {
         fact *= i;
         i -= 1;
