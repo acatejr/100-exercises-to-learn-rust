@@ -3,6 +3,7 @@
 //   Even better, extract that logic and reuse it in both places. You can use
 //   private functions or private static methods for that.
 
+
 pub struct Ticket {
     title: String,
     description: String,
@@ -35,6 +36,7 @@ impl Ticket {
     }
 
     pub fn title(&self) -> &String {
+        
         &self.title
     }
 
@@ -44,6 +46,46 @@ impl Ticket {
 
     pub fn status(&self) -> &String {
         &self.status
+    }
+
+    pub fn set_title(&mut self, title: String) {
+        validate_title(&title);        
+        self.title = title;
+    }
+
+    pub fn set_description(&mut self, new_description: String) {
+        validate_description(&new_description);
+        self.description = new_description;
+    }
+
+    pub fn set_status(&mut self, new_status: String) {
+        validate_status(&new_status);
+        self.status = new_status;
+    }
+
+}
+
+fn validate_status(status: &String) {
+    if status != "To-Do" && status != "In Progress" && status != "Done" {
+        panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+    }
+}
+
+fn validate_description(desc: &String) {
+    if desc.is_empty() {
+        panic!("Description cannot be empty");
+    }
+    if desc.len() > 500 {
+        panic!("Description cannot be longer than 500 bytes");
+    }
+}
+
+fn validate_title(title: &String) {
+    if title.is_empty() {
+        panic!("Title cannot be empty");
+    }
+    if title.len() > 50 {
+        panic!("Title cannot be longer than 50 bytes");
     }
 }
 
